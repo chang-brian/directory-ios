@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import Branch
 
 class ViewController2: UIViewController {
 
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var share: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var dept: UILabel!
+    @IBOutlet weak var share: UIButton!
+    
+    var buo: BranchUniversalObject = BranchUniversalObject()
+    var lp: BranchLinkProperties = BranchLinkProperties()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +56,31 @@ class ViewController2: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if let textToShow = textToShow {
-            name.text = textToShow
+            let result = textToShow
+//            name.text = result
+            let resultArray = result.characters.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
+//            print(String(resultArray[0]), String(resultArray[1]), String(resultArray[2]))
+            name.text = String(resultArray[0])
+            dept.text = String(resultArray[1])
+            desc.text = String(resultArray[2])
+            
+            let nameArray = String(resultArray[0]).characters.split(separator: " ")
+            let imageName = String(nameArray[0]).lowercased() + "_" + String(String(nameArray[1]).characters[String(nameArray[1]).characters.startIndex]).lowercased()
+            image.image = UIImage(named: "\(imageName)")
+            
+            buo = BranchUniversalObject()
+            buo.title = name.text
+            buo.contentDescription = dept.text
+            buo.addMetadataKey("name", value: name.text!)
+            buo.addMetadataKey("dept", value: dept.text!)
+            buo.addMetadataKey("desc", value: desc.text!)
+            
+            lp = BranchLinkProperties()
+            
         }
+    }
+    
+    @IBAction func share(_ sender: UIButton) {
+        buo.showShareSheet(with: lp, andShareText: nil, from: nil, completionWithError: nil)
     }
 }

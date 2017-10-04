@@ -13,12 +13,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    let staticList = ["brian", "aaron", "agrim", "ethan", "rubin", "parth", "amruta", "aparna"]
-    var employeeList = ["brian", "aaron", "agrim", "ethan", "rubin", "parth", "amruta", "aparna"]
+//    let staticList = ["brian", "aaron", "agrim", "ethan", "rubin", "parth", "amruta", "aparna"]
+//    var employeeList = ["brian", "aaron", "agrim", "ethan", "rubin", "parth", "amruta", "aparna"]
+    var nameArray: [String]!
+    var staticArray: [String]!
+    let dictionary = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "strings", ofType: "plist")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        nameArray = dictionary!.allKeys as! [String]
+        staticArray = dictionary!.allKeys as! [String]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchBar.text = ""
+        filterTableView(text: "")
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,20 +38,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employeeList.count
+        return nameArray!.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let name = nameArray[indexPath.row]
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = employeeList[indexPath.row]
+        cell.textLabel?.text = name
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(employeeList[indexPath.row])
         
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ViewController2") as! ViewController2
-        next.textToShow = employeeList[indexPath.row]
+        let name = nameArray[indexPath.row]
+        let titleDesc = dictionary?[name] as! String
+//        let result = titleDesc.characters.split(separator: ",", maxSplits: 1, omittingEmptySubsequences: true)
+//        let title = String(result[0])
+//        let desc = result[1]
+//        next.textToShow = name + "," + titleDesc
+        next.textToShow = "\(name),\(titleDesc)"
+        searchBar.resignFirstResponder()
         self.navigationController?.pushViewController(next, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -51,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func filterTableView(text: String) {
-        employeeList = staticList.filter( { (String) -> Bool in
+        nameArray = staticArray.filter( { (String) -> Bool in
             return String.lowercased().hasPrefix(text.lowercased())
         })
         tableView.reloadData()
