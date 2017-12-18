@@ -23,23 +23,7 @@ class ViewController2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        back = UIBarButtonItem(title: "Back Title", style: UIBarButtonItemStyle.plain, target: self, action: #selector(backAction))
-//        self.navigationItem.leftBarButtonItem = back
-        // Do any additional setup if required.
     }
-    
-//    func backAction(){
-//        //print("Back Button Clicked")
-//        dismiss(animated: true, completion: nil)
-//        
-//    }
-    
-//    @IBAction func goBack() {
-//        dismissViewControllerAnimated(true, completion:nil)
-//    }
-
-
-        // Do any additional setup after loading the view.
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,9 +41,7 @@ class ViewController2: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if let textToShow = textToShow {
             let result = textToShow
-//            name.text = result
             let resultArray = result.characters.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
-//            print(String(resultArray[0]), String(resultArray[1]), String(resultArray[2]))
             name.text = String(resultArray[0])
             dept.text = String(resultArray[1])
             desc.text = String(resultArray[2])

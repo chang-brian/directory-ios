@@ -13,8 +13,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-//    let staticList = ["brian", "aaron", "agrim", "ethan", "rubin", "parth", "amruta", "aparna"]
-//    var employeeList = ["brian", "aaron", "agrim", "ethan", "rubin", "parth", "amruta", "aparna"]
     var nameArray: [String]!
     var staticArray: [String]!
     let dictionary = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "strings", ofType: "plist")!)
@@ -53,10 +51,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ViewController2") as! ViewController2
         let name = nameArray[indexPath.row]
         let titleDesc = dictionary?[name] as! String
-//        let result = titleDesc.characters.split(separator: ",", maxSplits: 1, omittingEmptySubsequences: true)
-//        let title = String(result[0])
-//        let desc = result[1]
-//        next.textToShow = name + "," + titleDesc
         next.textToShow = "\(name),\(titleDesc)"
         searchBar.resignFirstResponder()
         self.navigationController?.pushViewController(next, animated: true)
