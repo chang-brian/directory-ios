@@ -56,6 +56,7 @@ class ViewController2: UIViewController {
             buo.addMetadataKey("name", value: name.text!)
             buo.addMetadataKey("dept", value: dept.text!)
             buo.addMetadataKey("desc", value: desc.text!)
+            buo.addMetadataKey("test", value: "appSearch?search=إفطار")
             
             lp = BranchLinkProperties()
             

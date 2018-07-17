@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Directory</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -16,6 +18,15 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>branchdirectory</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -42,15 +53,11 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>branch_key</key>
-	<string>key_live_pnyHaHNh4PCaJDTyKkWwapmpvtbBmQFt</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>branchdirectory</string>
-			</array>
-		</dict>
-	</array>
+	<dict>
+		<key>live</key>
+		<string>key_live_pnyHaHNh4PCaJDTyKkWwapmpvtbBmQFt</string>
+		<key>test</key>
+		<string>key_live_pnyHaHNh4PCaJDTyKkWwapmpvtbBmQFt</string>
+	</dict>
 </dict>
 </plist>
